@@ -14,7 +14,6 @@ export async function updateSession(request: NextRequest) {
         const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
         if (!supabaseUrl || !supabaseAnonKey) {
-            console.error('Supabase environment variables are missing')
             return supabaseResponse
         }
 
@@ -39,7 +38,7 @@ export async function updateSession(request: NextRequest) {
             }
         )
 
-        // Refresh session
+        // Refresh session (fast operation)
         const {
             data: { user },
         } = await supabase.auth.getUser()
@@ -53,38 +52,17 @@ export async function updateSession(request: NextRequest) {
                 loginUrl.pathname = '/admin/login'
                 return NextResponse.redirect(loginUrl)
             }
-
-            // Validate against allowlist
-            const { data: allowed } = await supabase
-                .from('admins_allowlist')
-                .select('email')
-                .eq('email', user.email ?? '')
-                .single()
-
-            if (!allowed) {
-                const loginUrl = request.nextUrl.clone()
-                loginUrl.pathname = '/admin/login'
-                loginUrl.searchParams.set('error', 'unauthorized')
-                return NextResponse.redirect(loginUrl)
-            }
+            // Note: Admins allowlist check moved to AdminLayout for performance
         }
 
-        // Redirect authenticated+allowed user away from login page
+        // Redirect authenticated user away from login page
         if (pathname === '/admin/login' && user) {
-            const { data: allowed } = await supabase
-                .from('admins_allowlist')
-                .select('email')
-                .eq('email', user.email ?? '')
-                .single()
-
-            if (allowed) {
-                const dashboardUrl = request.nextUrl.clone()
-                dashboardUrl.pathname = '/admin'
-                return NextResponse.redirect(dashboardUrl)
-            }
+            const dashboardUrl = request.nextUrl.clone()
+            dashboardUrl.pathname = '/admin'
+            return NextResponse.redirect(dashboardUrl)
         }
     } catch (error) {
-        console.error('Middleware execution failed:', error)
+        console.error('Middleware check failed:', error)
     }
 
     return supabaseResponse

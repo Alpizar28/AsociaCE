@@ -12,8 +12,18 @@ export default async function AdminLayout({
         data: { user },
     } = await supabase.auth.getUser()
 
-    // Middleware handles redirect, but double-check for safety
     if (!user) redirect('/admin/login')
+
+    // Validate against allowlist (Moved from middleware for performance)
+    const { data: allowed } = await supabase
+        .from('admins_allowlist')
+        .select('email')
+        .eq('email', user.email ?? '')
+        .single()
+
+    if (!allowed) {
+        redirect('/admin/login?error=unauthorized')
+    }
 
     return (
         <div style={{ display: 'flex', minHeight: '100vh', background: '#f8fafc' }}>
