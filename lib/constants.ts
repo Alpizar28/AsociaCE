@@ -6,9 +6,9 @@ import {
 } from '@/types/database'
 
 // ── App metadata ──────────────────────────────────────────
-export const APP_NAME = 'Portal IC'
+export const APP_NAME = 'Portal CE'
 export const APP_DESCRIPTION =
-    'Portal institucional para estudiantes de Ingeniería en Computadores – TEC'
+    'Portal institucional para estudiantes de Computadores – TEC'
 export const APP_URL =
     process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 

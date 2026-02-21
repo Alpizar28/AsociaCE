@@ -47,12 +47,12 @@ export default function Footer() {
                                     letterSpacing: '0.05em',
                                 }}
                             >
-                                IC
+                                CE
                             </span>
                             <span style={{ color: 'white', fontWeight: 600 }}>{APP_NAME}</span>
                         </div>
                         <p style={{ fontSize: '0.875rem', lineHeight: '1.6', maxWidth: '24ch' }}>
-                            Portal institucional de la Escuela de Ingeniería en Computadores, TEC.
+                            Portal institucional para la comunidad de Computadores del TEC.
                         </p>
                     </div>
 
@@ -138,6 +138,33 @@ export default function Footer() {
                             ))}
                         </ul>
                     </div>
+
+                    {/* Credits */}
+                    <div>
+                        <h4
+                            style={{
+                                color: 'white',
+                                fontSize: '0.875rem',
+                                fontWeight: 600,
+                                marginBottom: '0.75rem',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                        >
+                            Desarrollo
+                        </h4>
+                        <p style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+                            Hecho con ❤️ por<br />
+                            <a
+                                href="https://jokem.tech"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: 'white', fontWeight: 600, textDecoration: 'none' }}
+                            >
+                                Jokem Technologies
+                            </a>
+                        </p>
+                    </div>
                 </div>
 
                 {/* Bottom bar */}
@@ -153,7 +180,7 @@ export default function Footer() {
                     }}
                 >
                     <span>
-                        © {currentYear} Escuela de Ingeniería en Computadores – Instituto Tecnológico de Costa Rica
+                        © {currentYear} Computadores (CE) – Instituto Tecnológico de Costa Rica
                     </span>
                     <Link
                         href="/admin/login"

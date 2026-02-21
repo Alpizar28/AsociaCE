@@ -7,9 +7,9 @@ import { EVENT_TYPE_COLORS, FAQ_CATEGORIES } from '@/lib/constants'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Inicio – Portal IC | TEC',
+    title: 'Inicio – Portal CE | TEC',
     description:
-        'Portal institucional de Ingeniería en Computadores del TEC. Encuentra respuestas, noticias, calendario académico y contactos.',
+        'Portal institucional para estudiantes de Computadores del TEC. Encuentra respuestas, noticias, calendario académico y contactos.',
 }
 
 export default async function HomePage() {
@@ -70,7 +70,7 @@ export default async function HomePage() {
                                 textTransform: 'uppercase',
                             }}
                         >
-                            Escuela de Ingeniería en Computadores · TEC
+                            Escuela de Ingeniería en Computadores (CE) · TEC
                         </div>
                         <h1
                             style={{
@@ -81,7 +81,7 @@ export default async function HomePage() {
                                 lineHeight: 1.2,
                             }}
                         >
-                            Portal IC
+                            Portal CE
                         </h1>
                         <p
                             style={{
@@ -92,7 +92,7 @@ export default async function HomePage() {
                                 margin: '0 auto 2.5rem',
                             }}
                         >
-                            Información centralizada para estudiantes de Ingeniería en Computadores.
+                            Información centralizada para estudiantes de Computadores.
                         </p>
 
                         {/* Search bar */}
