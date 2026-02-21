@@ -1,9 +1,8 @@
-// @ts-nocheck – Supabase v2 query chain type narrowing; read-only page
 import { createClient } from '@/lib/supabase/server'
 import { Calendar as CalIcon, MapPin, FileText } from 'lucide-react'
 import { EVENT_TYPE_COLORS, EVENT_TYPES } from '@/lib/constants'
 import { formatDate, formatTime } from '@/lib/utils/date'
-import type { CalendarEventType } from '@/types/database'
+import type { CalendarEventType, CalendarEvent } from '@/types/database'
 import type { Metadata } from 'next'
 import ReportButton from '@/components/shared/ReportButton'
 
@@ -21,21 +20,22 @@ export default async function CalendarioPage({ searchParams }: Props) {
     const eventType = type as CalendarEventType | undefined
     const supabase = await createClient()
 
-    let query = supabase
+    const query = supabase
         .from('calendar_events')
         .select('*')
         .eq('status', 'published')
         .order('start_datetime', { ascending: true })
 
     if (eventType && Object.keys(EVENT_TYPES).includes(eventType)) {
-        query = query.eq('type', eventType)
+        query.eq('type', eventType)
     }
 
     const { data: events } = await query
+    const typedEvents = (events as CalendarEvent[]) || []
 
     const now = new Date().toISOString()
-    const upcoming = events?.filter((e) => e.start_datetime >= now) ?? []
-    const past = events?.filter((e) => e.start_datetime < now) ?? []
+    const upcoming = typedEvents.filter((e) => e.start_datetime >= now)
+    const past = typedEvents.filter((e) => e.start_datetime < now)
 
     return (
         <div className="section-gap">

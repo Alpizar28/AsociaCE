@@ -1,4 +1,3 @@
-// @ts-nocheck – Supabase v2 strict generics; types enforced at DB level via RLS/schema
 'use client'
 
 import { useState } from 'react'
@@ -21,14 +20,21 @@ export default function ReportButton({ pageType, pageId }: Props) {
         e.preventDefault()
         if (!message.trim()) return
         setLoading(true)
-        const supabase = createClient()
-        await supabase.from('content_reports').insert({
-            page_type: pageType,
-            page_id: pageId,
-            message: message.trim(),
-        })
-        setSent(true)
-        setLoading(false)
+
+        try {
+            const supabase = createClient()
+            // @ts-ignore – Fix for mysterious generic narrowing on 'content_reports' table
+            await supabase.from('content_reports').insert({
+                page_type: pageType,
+                page_id: pageId,
+                message: message.trim(),
+            })
+            setSent(true)
+        } catch (error) {
+            console.error('Report submission failed:', error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     if (sent) {
