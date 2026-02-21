@@ -85,6 +85,7 @@ Estos valores se encuentran en **Supabase → Settings → API**.
 ```bash
 npm run dev
 ```
+7
 
 Abre [http://localhost:3000](http://localhost:3000).
 

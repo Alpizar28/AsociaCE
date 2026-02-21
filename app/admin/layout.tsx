@@ -37,7 +37,12 @@ export default async function AdminLayout({
                 </div>
             </div>
         )
-    } catch (error) {
+    } catch (error: any) {
+        // Next.js uses internal errors for redirect() and notFound().
+        // We should not catch them as critical errors.
+        if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+            throw error;
+        }
         console.error('Critical AdminLayout error:', error)
         redirect('/admin/login?error=system_error')
     }

@@ -48,7 +48,7 @@ export default function Header() {
                             letterSpacing: '0.05em',
                         }}
                     >
-                        IC
+                        CE
                     </span>
                     <span style={{ color: 'var(--color-text)' }}>{APP_NAME}</span>
                 </Link>

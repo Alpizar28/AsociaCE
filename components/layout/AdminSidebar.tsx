@@ -69,7 +69,7 @@ export default function AdminSidebar() {
                             fontWeight: 700,
                         }}
                     >
-                        IC
+                        CE
                     </span>
                     <div>
                         <div style={{ color: 'white', fontWeight: 600, fontSize: '0.9rem' }}>
