@@ -62,7 +62,7 @@ function LoginContent() {
                             marginBottom: '1rem',
                         }}
                     >
-                        IC
+                        CE
                     </div>
                     <h1
                         style={{
@@ -72,7 +72,7 @@ function LoginContent() {
                             marginBottom: '0.375rem',
                         }}
                     >
-                        Portal IC
+                        Portal CE
                     </h1>
                     <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
                         Panel Administrativo
@@ -110,7 +110,7 @@ function LoginContent() {
                         lineHeight: 1.5,
                     }}
                 >
-                    El acceso está restringido a personal autorizado de la Escuela de IC.
+                    El acceso está restringido a personal autorizado de Computadores.
                 </p>
 
                 <button
